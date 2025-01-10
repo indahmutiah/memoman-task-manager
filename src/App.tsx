@@ -1,6 +1,4 @@
-import "./App.css";
-
-function App() {
+export function App() {
   return (
     <>
       <header className="bg-yellow-900 text-white p-4">
@@ -15,18 +13,18 @@ function App() {
           Memoman
         </a>
       </header>
+
       <main className="flex flex-col md:flex-row h-screen">
-        <div className="w-full md:w-1/3 bg-gray-50 p-6 overflow-y-auto">
-          <div className="flex flex-col gap-4"></div>
-        </div>
-        <div className="w-full md:w-2/3 bg-white shadow-lg overflow-y-auto">
+        <section className="w-full md:w-1/3 bg-gray-50 p-6 overflow-y-auto">
+          <div className="flex flex-col gap-4">...</div>
+        </section>
+
+        <section className="w-full md:w-2/3 bg-white shadow-lg overflow-y-auto">
           <h1 className="text-2xl font-bold">
             Welcome to Memoman Task Manager
           </h1>
-        </div>
+        </section>
       </main>
     </>
   );
 }
-
-export default App;

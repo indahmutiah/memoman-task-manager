@@ -3,7 +3,7 @@ import { TaskList } from "./components/task-list";
 export function App() {
   return (
     <>
-     <Header />
+      <Header />
 
       <main className="flex flex-col md:flex-row h-screen">
         <section className="w-full md:w-1/3 bg-gray-50 p-6 overflow-y-auto">

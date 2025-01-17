@@ -24,7 +24,7 @@ export function TaskListItem({
   }
 
   return (
-    <li className="flex items-center gap-4 p-4 hover:bg-gray-100">
+    <li className="flex items-center gap-4 p-4 hover:bg-white">
       <input
         type="checkbox"
         checked={isCompleted}

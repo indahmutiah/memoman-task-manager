@@ -1,12 +1,12 @@
+import { Task } from "../types/task";
+
 type TaskListItemProps = {
-  text: string;
-  isCompleted: boolean;
+  taskItem: Task;
   onToggle: () => void; // to sign check or uncheck
 };
 
 export function TaskListItem({
-  text,
-  isCompleted,
+  taskItem: { text, isCompleted, date },
   onToggle,
 }: TaskListItemProps) {
   const checkBoxClass = [
@@ -24,14 +24,17 @@ export function TaskListItem({
   }
 
   return (
-    <li className="flex items-center gap-4 p-4 hover:bg-white">
+    <li className="flex items-center gap-4 ">
       <input
         type="checkbox"
         checked={isCompleted}
         onChange={onToggle}
         className={checkBoxClass.join(" ")}
       />
-      <span className="text-xl">{text}</span>
+      <div>
+        <p className="text-xl">{text}</p>
+        <span className="text-sm text-gray-700">{date.toDateString()}</span>
+      </div>
     </li>
   );
 }

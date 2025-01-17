@@ -3,7 +3,7 @@ import { Task } from "../types/task";
 
 export function TaskList({ taskItem }: { taskItem: Task[] }) {
   return (
-    <ul className="flex flex-col gap-4 p-4  hover:bg-gray-100">
+    <ul className="flex flex-col gap-4 p-4">
       {taskItem.map((taskItem) => {
         return (
           <li
@@ -11,8 +11,7 @@ export function TaskList({ taskItem }: { taskItem: Task[] }) {
             className="flex items-center gap-4 p-4 hover:bg-gray-100"
           >
             <TaskListItem
-              text={taskItem.text}
-              isCompleted={taskItem.isCompleted}
+              taskItem={taskItem}
               onToggle={() => {}}
             />
           </li>

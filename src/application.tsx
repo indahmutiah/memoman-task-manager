@@ -1,9 +1,9 @@
 import { Header } from "./components/header";
 import { TaskList } from "./components/task-list";
 import { MenuSection } from "./components/menu-section";
+import { Footer } from "./components/footer";
 import { Task } from "./types/task";
 import { IoAdd } from "react-icons/io5";
-
 
 export function App() {
   const taskItem: Task[] = [
@@ -11,16 +11,19 @@ export function App() {
       id: 1,
       text: "Fixing Bugs for the Project",
       isCompleted: true,
+      date: new Date(),
     },
     {
       id: 2,
       text: "Report Daily Progress",
       isCompleted: true,
+      date: new Date(),
     },
     {
       id: 3,
       text: "Checking for New Features",
       isCompleted: false,
+      date: new Date(),
     },
   ];
   return (
@@ -39,10 +42,9 @@ export function App() {
             Add Task
           </button>
           <TaskList taskItem={taskItem} />
-          
         </section>
       </main>
-      
+      <Footer />
     </>
   );
 }

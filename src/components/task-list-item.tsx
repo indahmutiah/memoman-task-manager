@@ -1,13 +1,17 @@
+import { Trash2Icon } from "lucide-react";
 import { Task } from "../types/task";
+import { Button } from "./ui/button";
 
 type TaskListItemProps = {
   taskItem: Task;
-  onToggle: () => void; // to sign check or uncheck
+  onToggle: () => void;
+  onDelete: () => void;
 };
 
 export function TaskListItem({
   taskItem: { text, isCompleted, date },
   onToggle,
+  onDelete,
 }: TaskListItemProps) {
   const checkBoxClass = [
     "h-5",
@@ -35,6 +39,12 @@ export function TaskListItem({
         <p className="text-xl">{text}</p>
         <span className="text-sm text-gray-700">{date.toDateString()}</span>
       </div>
+      <Button
+        onClick={onDelete}
+        className="ml-auto bg-[hsl(var(--destructive))] text-[hsl(var(--destructive-foreground))] hover:bg-[hsl(var(--destructive-hover))"
+      >
+        <Trash2Icon />
+      </Button>
     </li>
   );
 }

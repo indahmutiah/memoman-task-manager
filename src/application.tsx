@@ -1,9 +1,10 @@
-import { Header } from "./components/header";
-import { TaskList } from "./components/task-list";
-import { MenuSection } from "./components/menu-section";
-import { Footer } from "./components/footer";
-import { Task } from "./types/task";
-import { IoAdd } from "react-icons/io5";
+import { Header } from "@/components/header";
+import { TaskList } from "@/components/task-list";
+import { MenuSection } from "@/components/menu-section";
+import { Footer } from "@/components/footer";
+import { Task } from "@/types/task";
+import { Button } from "@/components/ui/button";
+import { PlusIcon } from "lucide-react";
 
 export function App() {
   const taskItem: Task[] = [
@@ -35,12 +36,12 @@ export function App() {
 
         <section className="w-full md:w-2/3 bg-white shadow-lg overflow-y-auto">
           <h2 className="text-2xl font-bold">
-            <span className="ml-4">Tasks</span>
+            <span className="ml-4">Memo</span>
           </h2>
-          <button className="bg-yellow-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded m-4">
-            <IoAdd className="inline-block mr-2" />
-            Add Task
-          </button>
+
+          <Button className="mt-2 mx-4">
+            <PlusIcon/>Add Memo
+          </Button>
           <TaskList taskItem={taskItem} />
         </section>
       </main>

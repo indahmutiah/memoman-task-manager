@@ -13,11 +13,11 @@ import { Button } from "@/components/ui/button";
 import { Trash2Icon } from "lucide-react";
 
 interface DeleteAlertProps {
-  onConfirm: () => void;
+  onDelete: () => void;
   taskText: string;
 }
 
-export function DeleteAlert({ onConfirm , taskText }: DeleteAlertProps) {
+export function DeleteAlert({ onDelete , taskText }: DeleteAlertProps) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -34,7 +34,7 @@ export function DeleteAlert({ onConfirm , taskText }: DeleteAlertProps) {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={onConfirm}>Delete</AlertDialogAction>
+          <AlertDialogAction onClick={onDelete}>Delete</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

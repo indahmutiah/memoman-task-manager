@@ -11,16 +11,16 @@ type TaskCardsProps = {
 };
 
 export function TaskCards({ taskItem, onToggle, onDelete }: TaskCardsProps) {
-  const { text, isCompleted, date } = taskItem;
+  const { title, isCompleted, date } = taskItem;
 
   return (
     <Card className="shadow-lg rounded-lg border-yellow-900 border-2">
       <CardHeader className="flex flex-row items-center justify-between gap-4">
         <div className="flex items-center space-x-2">
           <Checkbox checked={isCompleted} onCheckedChange={onToggle} />
-          <h2 className="text-xl font-semibold">{text}</h2>
+          <h2 className="text-xl font-semibold">{title}</h2>
         </div>
-        <DeleteAlert onConfirm={onDelete} taskText={text} />
+        <DeleteAlert onDelete={onDelete} taskText={title} />
       </CardHeader>
       <CardContent className="px-6">
         <p className="text-sm text-gray-700">{date.toDateString()}</p>

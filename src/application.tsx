@@ -3,26 +3,25 @@ import { TaskList } from "@/components/task-list";
 import { MenuSection } from "@/components/menu-section";
 import { Footer } from "@/components/footer";
 import { Task } from "@/types/task";
-import { Button } from "@/components/ui/button";
-import { PlusIcon } from "lucide-react";
 import { useState } from "react";
+import { DialogAddTask } from "@/components/dialog-add-task";
 
 const initialTaskItem: Task[] = [
   {
     id: 1,
-    text: "Fixing Bugs for the Project",
+    title: "Fixing Bugs for the Project",
     isCompleted: true,
     date: new Date(),
   },
   {
     id: 2,
-    text: "Report Daily Progress",
+    title: "Report Daily Progress",
     isCompleted: true,
     date: new Date(),
   },
   {
     id: 3,
-    text: "Checking for New Features",
+    title: "Checking for New Features",
     isCompleted: false,
     date: new Date(),
   },
@@ -31,10 +30,10 @@ const initialTaskItem: Task[] = [
 export function App() {
   const [taskItems, setTaskItem] = useState(initialTaskItem);
 
-  function addTaskItem() {
+  function addTaskItem(title: string) {
     const newTaskItem = {
       id: taskItems.length > 0 ? taskItems[taskItems.length - 1].id + 1 : 1,
-      text: "New Memo",
+      title: title,
       isCompleted: false,
       date: new Date(),
     };
@@ -72,10 +71,7 @@ export function App() {
             <span className="ml-4">Memo</span>
           </h2>
 
-          <Button onClick={addTaskItem} className="mt-2 mx-4">
-            <PlusIcon />
-            Add Memo
-          </Button>
+          <DialogAddTask onSubmitTask={addTaskItem} />
           <TaskList
             taskItem={taskItems}
             onToggle={toogleTask}

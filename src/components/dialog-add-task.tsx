@@ -60,7 +60,7 @@ export function DialogAddTask({ onSubmitTask }: addTaskDialogProps) {
           </div>
         </form>
         <DialogFooter>
-          <Button variant="default" onClick={handleSubmit} type="submit">
+          <Button variant="default" onClick={handleSubmit} type="submit" className="w-full">
             Submit
           </Button>
         </DialogFooter>

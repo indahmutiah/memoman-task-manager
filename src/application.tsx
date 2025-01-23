@@ -68,7 +68,7 @@ export function App() {
 
         <section className="w-full md:w-2/3 bg-white shadow-lg overflow-y-auto">
           <h2 className="text-2xl font-bold">
-            <span className="ml-4">Memo</span>
+            <span className="ml-4">Memo ({taskItems.length})</span>
           </h2>
 
           <DialogAddTask onSubmitTask={addTaskItem} />

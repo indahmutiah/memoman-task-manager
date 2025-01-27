@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { PlusIcon } from "lucide-react";
+import { TiptapEditor } from "@/components/tiptap-editor";
 
 interface addTaskDialogProps {
   onSubmitTask: (title: string) => void;
@@ -45,22 +46,31 @@ export function DialogAddTask({ onSubmitTask }: addTaskDialogProps) {
             </DialogDescription>
           </DialogHeader>
           <div className="grid gap-4 py-4">
+            <Label htmlFor="title">
+              Title
+            </Label>
             <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="title" className="text-right">
-                Title
-              </Label>
               <Input
                 id="title"
                 name="title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="col-span-3"
+                className="col-span-4"
               />
             </div>
+            <Label htmlFor="memo">
+              Memo
+            </Label>
+            <TiptapEditor />
           </div>
         </form>
         <DialogFooter>
-          <Button variant="default" onClick={handleSubmit} type="submit" className="w-full">
+          <Button
+            variant="default"
+            onClick={handleSubmit}
+            type="submit"
+            className="w-full"
+          >
             Submit
           </Button>
         </DialogFooter>

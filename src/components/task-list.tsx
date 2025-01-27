@@ -1,5 +1,5 @@
-import { TaskListItem } from "@/components/task-list-item";
 import { Task } from "@/types/task";
+import { TaskCard } from "./task-card";
 
 type TaskListProps = {
   taskItem: Task[];
@@ -11,7 +11,7 @@ export function TaskList({ taskItem, onToggle, onDelete }: TaskListProps) {
   return (
     <ul className="flex flex-col gap-4 p-4">
       {taskItem.map((task) => (
-        <TaskListItem
+        <TaskCard
           key={task.id}
           taskItem={task}
           onToggle={() => onToggle(task.id)}

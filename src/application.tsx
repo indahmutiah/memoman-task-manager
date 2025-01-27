@@ -10,6 +10,7 @@ const initialTaskItem: Task[] = [
   {
     id: 1,
     title: "Fixing Bugs for the Project",
+    description: "<p><b>So fun.</b> <i>So cool.</i></p>",
     isCompleted: true,
     date: new Date(),
   },
@@ -30,13 +31,15 @@ const initialTaskItem: Task[] = [
 export function App() {
   const [taskItems, setTaskItem] = useState(initialTaskItem);
 
-  function addTaskItem(title: string) {
-    const newTaskItem = {
+  function addTaskItem(formData: FormData) {
+    const newTaskItem: Task = {
       id: taskItems.length > 0 ? taskItems[taskItems.length - 1].id + 1 : 1,
-      title: title,
+      title: String(formData.get("title")),
+      description: String(formData.get("description")),
       isCompleted: false,
       date: new Date(),
     };
+
     const updatedTaskItems = [...taskItems, newTaskItem];
 
     setTaskItem(updatedTaskItems);
@@ -71,12 +74,12 @@ export function App() {
             <span className="ml-4">Memo ({taskItems.length})</span>
           </h2>
 
-          <DialogAddTask onSubmitTask={addTaskItem} />
+          <DialogAddTask addTaskItem={addTaskItem} />
           <TaskList
             taskItem={taskItems}
             onToggle={toogleTask}
             onDelete={deleteTask}
-           />
+          />
         </section>
       </main>
       <Footer />

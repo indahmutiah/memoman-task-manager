@@ -13,22 +13,21 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { PlusIcon } from "lucide-react";
 import { TiptapEditor } from "@/components/tiptap-editor";
+import { Textarea } from "./ui/textarea";
 
 interface addTaskDialogProps {
-  onSubmitTask: (title: string) => void;
+  addTaskItem: (formData: FormData) => void;
 }
-export function DialogAddTask({ onSubmitTask }: addTaskDialogProps) {
-  const [title, setTitle] = useState("");
+export function DialogAddTask({ addTaskItem }: addTaskDialogProps) {
   const [open, setOpen] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (title.trim()) {
-      onSubmitTask(title.trim());
-      setTitle("");
-      setOpen(false);
-    }
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    addTaskItem(formData);
+    setOpen(false);
   };
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -46,34 +45,25 @@ export function DialogAddTask({ onSubmitTask }: addTaskDialogProps) {
             </DialogDescription>
           </DialogHeader>
           <div className="grid gap-4 py-4">
-            <Label htmlFor="title">
-              Title
-            </Label>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Input
-                id="title"
-                name="title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                className="col-span-4"
-              />
+            <div>
+              <Label htmlFor="title">Title</Label>
+              <Input id="title" name="title" className="col-span-4" />
             </div>
-            <Label htmlFor="memo">
-              Memo
-            </Label>
+
+            <div>
+              <Label htmlFor="description">Description</Label>
+              <Textarea id="description" name="description"></Textarea>
+            </div>
+
             <TiptapEditor />
           </div>
+
+          <DialogFooter>
+            <Button type="submit" variant="default" className="w-full">
+              Submit
+            </Button>
+          </DialogFooter>
         </form>
-        <DialogFooter>
-          <Button
-            variant="default"
-            onClick={handleSubmit}
-            type="submit"
-            className="w-full"
-          >
-            Submit
-          </Button>
-        </DialogFooter>
       </DialogContent>
     </Dialog>
   );

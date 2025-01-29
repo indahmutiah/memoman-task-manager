@@ -1,17 +1,28 @@
-import { Task } from "@/types/task";
+import parse from "html-react-parser";
+
+import { Memo } from "@/types/memo";
 import { Card, CardHeader, CardContent, CardFooter } from "./ui/card";
 import { Checkbox } from "./ui/checkbox";
 import { Badge } from "./ui/badge";
 import { DeleteAlert } from "@/components/delete-alert";
 
-type TaskCardsProps = {
-  taskItem: Task;
+type MemoCardsProps = {
+  memoItem: Memo;
   onToggle: () => void;
   onDelete: () => void;
 };
 
-export function TaskCards({ taskItem, onToggle, onDelete }: TaskCardsProps) {
-  const { title, isCompleted, date } = taskItem;
+function truncateDescription(description: string, maxWords: number): string {
+  const words = description.split(" ");
+  if (words.length > maxWords) {
+    return words.slice(0, maxWords).join(" ") + "...";
+  }
+  return description;
+}
+
+export function MemoCards({ memoItem, onToggle, onDelete }: MemoCardsProps) {
+  const { title, isCompleted, description, date } = memoItem;
+  const truncatedDescription = truncateDescription(description, 35);
 
   return (
     <Card className="shadow-lg rounded-lg border-yellow-900 border-2">
@@ -23,6 +34,7 @@ export function TaskCards({ taskItem, onToggle, onDelete }: TaskCardsProps) {
         <DeleteAlert onDelete={onDelete} taskText={title} />
       </CardHeader>
       <CardContent className="px-6">
+        <div>{parse(truncatedDescription)}</div>
         <p className="text-sm text-gray-700">{date.toDateString()}</p>
       </CardContent>
       <CardFooter>

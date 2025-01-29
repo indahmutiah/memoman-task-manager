@@ -1,7 +1,7 @@
-import { useEditor, EditorContent } from "@tiptap/react"
-import StarterKit from "@tiptap/starter-kit"
-import { Toggle } from "@/components/ui/toggle"
-import { Bold, Italic, List } from "lucide-react"
+import { useEditor, EditorContent } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import { Toggle } from "@/components/ui/toggle";
+import { Bold, Italic, List } from "lucide-react";
 
 export function TiptapEditor() {
   const editor = useEditor({
@@ -10,18 +10,18 @@ export function TiptapEditor() {
     editorProps: {
       attributes: {
         class:
-          "min-h-[150px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-yellow-100 ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+          "min-h-[150px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
       },
     },
-  })
+  });
 
   if (!editor) {
-    return null
+    return null;
   }
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="flex items-center gap-1 rounded-md border border-input bg-background p-1">
+      <div className="flex items-center gap-1 rounded-md border border-input bg-transparent p-1">
         <Toggle
           size="sm"
           pressed={editor.isActive("bold")}
@@ -41,7 +41,9 @@ export function TiptapEditor() {
         <Toggle
           size="sm"
           pressed={editor.isActive("bulletList")}
-          onPressedChange={() => editor.chain().focus().toggleBulletList().run()}
+          onPressedChange={() =>
+            editor.chain().focus().toggleBulletList().run()
+          }
         >
           <List className="h-4 w-4" />
         </Toggle>
@@ -49,5 +51,5 @@ export function TiptapEditor() {
 
       <EditorContent editor={editor} />
     </div>
-  )
+  );
 }

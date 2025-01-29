@@ -1,62 +1,45 @@
 import { Header } from "@/components/header";
-import { TaskList } from "@/components/task-list";
+import { MemoList } from "@/components/memo-list";
 import { MenuSection } from "@/components/menu-section";
 import { Footer } from "@/components/footer";
-import { Task } from "@/types/task";
+import { Memo } from "@/types/memo";
 import { useState } from "react";
-import { DialogAddTask } from "@/components/dialog-add-task";
+import { DialogAddMemo } from "@/components/dialog-add-memo";
+import { data } from "@/data/data";
 
-const initialTaskItem: Task[] = [
-  {
-    id: 1,
-    title: "Fixing Bugs for the Project",
-    isCompleted: true,
-    date: new Date(),
-  },
-  {
-    id: 2,
-    title: "Report Daily Progress",
-    isCompleted: true,
-    date: new Date(),
-  },
-  {
-    id: 3,
-    title: "Checking for New Features",
-    isCompleted: false,
-    date: new Date(),
-  },
-];
+const initialMemoItem: Memo[] = data;
 
 export function App() {
-  const [taskItems, setTaskItem] = useState(initialTaskItem);
+  const [memoItems, setMemoItem] = useState(initialMemoItem);
 
-  function addTaskItem(title: string) {
-    const newTaskItem = {
-      id: taskItems.length > 0 ? taskItems[taskItems.length - 1].id + 1 : 1,
-      title: title,
+  function addMemoItem(formData: FormData) {
+    const newMemoItem = {
+      id: memoItems.length > 0 ? memoItems[memoItems.length - 1].id + 1 : 1,
+      title: String(formData.get("title")),
+      description: String(formData.get("description")),
       isCompleted: false,
       date: new Date(),
     };
-    const updatedTaskItems = [...taskItems, newTaskItem];
+    const updatedMemoItems = [...memoItems, newMemoItem];
 
-    setTaskItem(updatedTaskItems);
+    setMemoItem(updatedMemoItems);
   }
 
-  function toogleTask(id: number) {
-    const updatedTaskItems = taskItems.map((task) => {
-      if (task.id === id) {
-        return { ...task, isCompleted: !task.isCompleted };
+  function toogleMemo(id: number) {
+    const updatedMemoItems = memoItems.map((Memo) => {
+      if (Memo.id === id) {
+        return { ...Memo, isCompleted: !Memo.isCompleted };
       }
-      return task;
+      return Memo;
     });
 
-    setTaskItem(updatedTaskItems);
+    setMemoItem(updatedMemoItems);
   }
 
-  function deleteTask(id: number) {
-    const updatedTaskItems = taskItems.filter((task) => task.id !== id);
+  function deleteMemo(id: number) {
+    const updatedMemoItems = memoItems.filter((Memo) => Memo.id !== id);
 
-    setTaskItem(updatedTaskItems);
+    setMemoItem(updatedMemoItems);
   }
 
   return (
@@ -68,15 +51,15 @@ export function App() {
 
         <section className="w-full md:w-2/3 bg-white shadow-lg overflow-y-auto">
           <h2 className="text-2xl font-bold">
-            <span className="ml-4">Memo ({taskItems.length})</span>
+            <span className="ml-4">Memo ({memoItems.length})</span>
           </h2>
 
-          <DialogAddTask onSubmitTask={addTaskItem} />
-          <TaskList
-            taskItem={taskItems}
-            onToggle={toogleTask}
-            onDelete={deleteTask}
-           />
+          <DialogAddMemo addMemoItem={addMemoItem} />
+          <MemoList
+            memoItem={memoItems}
+            onToggle={toogleMemo}
+            onDelete={deleteMemo}
+          />
         </section>
       </main>
       <Footer />

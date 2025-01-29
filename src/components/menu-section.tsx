@@ -1,5 +1,6 @@
 import { IoHome } from "react-icons/io5";
 import { FaCalendarCheck } from "react-icons/fa";
+import { NavLink } from "react-router";
 
 export function MenuSection() {
   return (
@@ -7,22 +8,30 @@ export function MenuSection() {
       <nav className="mt-6">
         <ul className="flex flex-col gap-4">
           <li>
-            <a
-              href="/"
-              className="block px-4 py-2 text-lg text-black hover:bg-yellow-800 rounded-md hover:text-white"
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive
+                  ? "block px-4 py-2 text-lg text-white bg-yellow-800 rounded-md"
+                  : "block px-4 py-2 text-lg text-black hover:bg-yellow-800 rounded-md hover:text-white"
+              }
             >
               <IoHome className="inline-block mr-2" />
               Home
-            </a>
+            </NavLink>
           </li>
           <li>
-            <a
-              href="/memo"
-              className="block px-4 py-2 text-lg text-black hover:bg-yellow-800 rounded-md hover:text-white"
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive
+                  ? "block px-4 py-2 text-lg text-white bg-yellow-800 rounded-md"
+                  : "block px-4 py-2 text-lg text-black hover:bg-yellow-800 rounded-md hover:text-white"
+              }
             >
               <FaCalendarCheck className="inline-block mr-2" />
               Memo
-            </a>
+            </NavLink>
           </li>
         </ul>
       </nav>

@@ -1,12 +1,12 @@
 import parse from "html-react-parser";
-
+import { useNavigate } from "react-router";
 import { Memo } from "@/types/memo";
 import { Card, CardHeader, CardContent, CardFooter } from "./ui/card";
 import { Checkbox } from "./ui/checkbox";
 import { Badge } from "./ui/badge";
 import { DeleteAlert } from "@/components/delete-alert";
 
-type MemoCardsProps = {
+type MemoCardProps = {
   memoItem: Memo;
   onToggle: () => void;
   onDelete: () => void;
@@ -20,12 +20,20 @@ function truncateDescription(description: string, maxWords: number): string {
   return description;
 }
 
-export function MemoCards({ memoItem, onToggle, onDelete }: MemoCardsProps) {
-  const { title, isCompleted, description, date } = memoItem;
+export function MemoCard({ memoItem, onToggle, onDelete }: MemoCardProps) {
+  const { id, title, isCompleted, description, date } = memoItem;
   const truncatedDescription = truncateDescription(description, 35);
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate(`/memo-details/${id}`);
+  };
 
   return (
-    <Card className="shadow-lg rounded-lg border-yellow-900 border-2">
+    <Card
+      className="shadow-lg rounded-lg border-yellow-900 border-2"
+      onClick={handleCardClick}
+    >
       <CardHeader className="flex flex-row items-center justify-between gap-4">
         <div className="flex items-center space-x-2">
           <Checkbox checked={isCompleted} onCheckedChange={onToggle} />

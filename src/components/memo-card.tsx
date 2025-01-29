@@ -1,10 +1,11 @@
 import parse from "html-react-parser";
-import { useNavigate } from "react-router";
 import { Memo } from "@/types/memo";
 import { Card, CardHeader, CardContent, CardFooter } from "./ui/card";
 import { Checkbox } from "./ui/checkbox";
 import { Badge } from "./ui/badge";
 import { DeleteAlert } from "@/components/delete-alert";
+import { Link } from "react-router";
+import { Button } from "./ui/button";
 
 type MemoCardProps = {
   memoItem: Memo;
@@ -21,25 +22,22 @@ function truncateDescription(description: string, maxWords: number): string {
 }
 
 export function MemoCard({ memoItem, onToggle, onDelete }: MemoCardProps) {
-  const { id, title, isCompleted, description, date } = memoItem;
+  const { title, isCompleted, description, date } = memoItem;
   const truncatedDescription = truncateDescription(description, 35);
-  const navigate = useNavigate();
-
-  const handleCardClick = () => {
-    navigate(`/memo-details/${id}`);
-  };
 
   return (
-    <Card
-      className="shadow-lg rounded-lg border-yellow-900 border-2"
-      onClick={handleCardClick}
-    >
+    <Card className="shadow-lg rounded-lg border-yellow-900 border-2">
       <CardHeader className="flex flex-row items-center justify-between gap-4">
         <div className="flex items-center space-x-2">
           <Checkbox checked={isCompleted} onCheckedChange={onToggle} />
           <h2 className="text-xl font-semibold">{title}</h2>
         </div>
-        <DeleteAlert onDelete={onDelete} taskText={title} />
+        <div className="inline-flex items-center gap-2">
+          <Button asChild>
+            <Link to={`/memo/${memoItem.id}`}>View</Link>
+          </Button>
+          <DeleteAlert onDelete={onDelete} taskText={title} />
+        </div>
       </CardHeader>
       <CardContent className="px-6">
         <div>{parse(truncatedDescription)}</div>

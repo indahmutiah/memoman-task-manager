@@ -1,15 +1,12 @@
-import { Header } from "@/components/header";
 import { MemoList } from "@/components/memo-list";
-import { MenuSection } from "@/components/menu-section";
-import { Footer } from "@/components/footer";
 import { Memo } from "@/types/memo";
 import { useState } from "react";
 import { DialogAddMemo } from "@/components/dialog-add-memo";
-import { data } from "@/data/data";
+import { DataMemoItems } from "@/data/memo-items";
 
-const initialMemoItem: Memo[] = data;
+const initialMemoItem: Memo[] = DataMemoItems;
 
-export function App() {
+export function HomeRoute() {
   const [memoItems, setMemoItem] = useState(initialMemoItem);
 
   function addMemoItem(formData: FormData) {
@@ -44,25 +41,16 @@ export function App() {
 
   return (
     <>
-      <Header />
+      <h2 className="text-2xl font-bold">
+        <span className="ml-4">Memo ({memoItems.length})</span>
+      </h2>
 
-      <main className="flex flex-col md:flex-row h-screen">
-        <MenuSection />
-
-        <section className="w-full md:w-2/3 bg-white shadow-lg overflow-y-auto">
-          <h2 className="text-2xl font-bold">
-            <span className="ml-4">Memo ({memoItems.length})</span>
-          </h2>
-
-          <DialogAddMemo addMemoItem={addMemoItem} />
-          <MemoList
-            memoItem={memoItems}
-            onToggle={toogleMemo}
-            onDelete={deleteMemo}
-          />
-        </section>
-      </main>
-      <Footer />
+      <DialogAddMemo addMemoItem={addMemoItem} />
+      <MemoList
+        memoItem={memoItems}
+        onToggle={toogleMemo}
+        onDelete={deleteMemo}
+      />
     </>
   );
 }

@@ -1,16 +1,21 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router";
+
 import "./index.css";
-import { App } from "./application";
-import { MemoDetailsRoute } from "./routes/memo-details";
+
+import { HomeRoute } from "./routes/home";
+import { MemoRoute } from "./routes/memo";
+import { LayoutRoute } from "./routes/layout";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route index path = "/" element = { <App /> } />
-        <Route path = "/memo-details/:id" element = { <MemoDetailsRoute /> } />
+        <Route element={<LayoutRoute />}>
+          <Route index path="/" element={<HomeRoute />} />
+          <Route path="/memo/:id" element={<MemoRoute />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   </StrictMode>

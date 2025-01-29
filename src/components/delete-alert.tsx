@@ -17,12 +17,13 @@ interface DeleteAlertProps {
   taskText: string;
 }
 
-export function DeleteAlert({ onDelete , taskText }: DeleteAlertProps) {
+export function DeleteAlert({ onDelete, taskText }: DeleteAlertProps) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button variant="destructive">
-            <Trash2Icon size={24} />
+          <Trash2Icon size={24} />
+          Delete
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>

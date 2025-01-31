@@ -2,9 +2,9 @@ import { MemoList } from "@/components/memo-list";
 import { Memo } from "@/types/memo";
 import { useState } from "react";
 import { DialogAddMemo } from "@/components/dialog-add-memo";
-import { DataMemoItems } from "@/data/memo-items";
+import { dataMemoItems } from "@/data/memo-items";
 
-const initialMemoItem: Memo[] = DataMemoItems;
+const initialMemoItem: Memo[] = dataMemoItems;
 
 export function HomeRoute() {
   const [memoItems, setMemoItem] = useState(initialMemoItem);
@@ -22,7 +22,7 @@ export function HomeRoute() {
     setMemoItem(updatedMemoItems);
   }
 
-  function toogleMemo(id: number) {
+  function toggleMemo(id: number) {
     const updatedMemoItems = memoItems.map((memo) => {
       if (memo.id === id) {
         return { ...memo, isCompleted: !memo.isCompleted };
@@ -48,7 +48,7 @@ export function HomeRoute() {
       <DialogAddMemo addMemoItem={addMemoItem} />
       <MemoList
         memoItem={memoItems}
-        onToggle={toogleMemo}
+        onToggle={toggleMemo}
         onDelete={deleteMemo}
       />
     </>

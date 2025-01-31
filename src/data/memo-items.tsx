@@ -1,6 +1,6 @@
 import { Memo } from "@/types/memo";
 
-export const DataMemoItems: Memo[] = [
+export const dataMemoItems: Memo[] = [
   {
     id: 1,
     title: "Fixing Bugs for the Project",

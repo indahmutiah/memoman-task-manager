@@ -7,7 +7,7 @@ import { dataMemoItems } from "@/data/memo-items";
 const initialMemoItem: Memo[] = dataMemoItems;
 
 export function HomeRoute() {
-  const [memoItems, setMemoItem] = useState(initialMemoItem);
+  const [memoItems, setMemoItems] = useState(initialMemoItem);
 
   function addMemoItem(formData: FormData) {
     const newMemoItem = {
@@ -19,7 +19,7 @@ export function HomeRoute() {
     };
     const updatedMemoItems = [...memoItems, newMemoItem];
 
-    setMemoItem(updatedMemoItems);
+    setMemoItems(updatedMemoItems);
   }
 
   function toggleMemo(id: number) {
@@ -30,13 +30,13 @@ export function HomeRoute() {
       return memo;
     });
 
-    setMemoItem(updatedMemoItems);
+    setMemoItems(updatedMemoItems);
   }
 
   function deleteMemo(id: number) {
     const updatedMemoItems = memoItems.filter((Memo) => Memo.id !== id);
 
-    setMemoItem(updatedMemoItems);
+    setMemoItems(updatedMemoItems);
   }
 
   return (

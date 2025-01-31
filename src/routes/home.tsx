@@ -23,11 +23,11 @@ export function HomeRoute() {
   }
 
   function toogleMemo(id: number) {
-    const updatedMemoItems = memoItems.map((Memo) => {
-      if (Memo.id === id) {
-        return { ...Memo, isCompleted: !Memo.isCompleted };
+    const updatedMemoItems = memoItems.map((memo) => {
+      if (memo.id === id) {
+        return { ...memo, isCompleted: !memo.isCompleted };
       }
-      return Memo;
+      return memo;
     });
 
     setMemoItem(updatedMemoItems);

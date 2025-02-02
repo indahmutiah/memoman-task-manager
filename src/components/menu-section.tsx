@@ -1,6 +1,7 @@
 import { IoHome } from "react-icons/io5";
 import { NavLink } from "react-router";
 import { FaCalendarCheck } from "react-icons/fa";
+import { Calculator } from "lucide-react";
 
 export function MenuSection() {
   return (
@@ -31,6 +32,19 @@ export function MenuSection() {
             >
               <FaCalendarCheck className="inline-block mr-2" />
               About
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/counter"
+              className={({ isActive }) =>
+                isActive
+                  ? "block px-4 py-2 text-lg text-white bg-background rounded-md"
+                  : "block px-4 py-2 text-lg text-black hover:bg-background rounded-md hover:text-white"
+              }
+            >
+              <Calculator className="inline-block mr-2" />
+              Counter
             </NavLink>
           </li>
         </ul>

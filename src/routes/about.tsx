@@ -1,4 +1,4 @@
-export function About() {
+export function AboutRoute() {
   return (
     <div>
       <div className="border-b border-gray-200">

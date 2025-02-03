@@ -8,12 +8,10 @@ export function HomeRoute() {
   const [memoItems, setMemoItems] = useState<Memo[]>([]);
 
   useEffect(() => {
-    setMemoItems(getMemoItemsStorage());
-  }, []);
-
-  useEffect(() => {
     if (memoItems.length > 0) {
       setMemoItemsStorage(memoItems);
+    } else {
+      setMemoItems(getMemoItemsStorage());
     }
   }, [memoItems]);
 

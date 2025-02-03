@@ -3,10 +3,11 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { MenuSection } from "@/components/menu-section";
 
-export function Layout() {
+export function LayoutRoute() {
   return (
     <>
       <Header />
+
       <main className="flex flex-col md:flex-row h-screen">
         <MenuSection />
 
@@ -14,6 +15,7 @@ export function Layout() {
           <Outlet />
         </section>
       </main>
+
       <Footer />
     </>
   );

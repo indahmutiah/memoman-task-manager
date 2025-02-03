@@ -6,18 +6,18 @@ import "./index.css";
 
 import { HomeRoute } from "@/routes/home";
 import { MemoRoute } from "@/routes/memo";
-import { Layout } from "@/routes/layout";
-import { About } from "@/routes/about";
+import { LayoutRoute } from "@/routes/layout";
+import { AboutRoute } from "@/routes/about";
 import { CounterRoute } from "@/routes/counter";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route element={<Layout />}>
+        <Route element={<LayoutRoute />}>
           <Route index path="/" element={<HomeRoute />} />
           <Route path="/memo/:id" element={<MemoRoute />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/about" element={<AboutRoute />} />
           <Route path="/counter" element={<CounterRoute />} />
         </Route>
       </Routes>

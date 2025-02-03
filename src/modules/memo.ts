@@ -15,3 +15,8 @@ export function getMemoItemsStorage(): Memo[] {
 export function setMemoItemsStorage(memoItems: Memo[]): void {
   localStorage.setItem("memoItems", JSON.stringify(memoItems));
 }
+
+export function getMemoByIdStorage(id: number): Memo | undefined {
+  const storedMemoItems = getMemoItemsStorage();
+  return storedMemoItems.find((memo) => memo.id === id);
+}

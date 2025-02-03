@@ -1,18 +1,22 @@
 import { useParams } from "react-router";
 
 import { Textarea } from "@/components/ui/textarea";
-import { dataMemoItems } from "@/data/memo-items";
 import { Button } from "@/components/ui/button";
+import { getMemoByIdStorage } from "@/modules/memo";
 
 export function MemoRoute() {
   const { id } = useParams();
 
   if (!id) return null;
 
-  const memoItem = dataMemoItems.find((memo) => memo.id === Number(id));
+  const memoItem = getMemoByIdStorage(Number(id));
 
   if (!memoItem) {
-    return <div>Memo not found</div>;
+    return (
+      <div>
+        <p>Memo not found</p>
+      </div>
+    );
   }
 
   function handleEditMemo(event: React.FormEvent<HTMLFormElement>) {

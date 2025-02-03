@@ -1,41 +1,45 @@
+import { useEffect, useState } from "react";
 import { MemoList } from "@/components/memo-list";
 import { Memo } from "@/types/memo";
-import { useState } from "react";
 import { DialogAddMemo } from "@/components/dialog-add-memo";
-import { dataMemoItems } from "@/data/memo-items";
-
-const initialMemoItem: Memo[] = dataMemoItems;
+import { getMemoItemsStorage, setMemoItemsStorage } from "@/modules/memo";
 
 export function HomeRoute() {
-  const [memoItems, setMemoItems] = useState(initialMemoItem);
+  const [memoItems, setMemoItems] = useState<Memo[]>([]);
+
+  useEffect(() => {
+    setMemoItems(getMemoItemsStorage());
+  }, []);
+
+  useEffect(() => {
+    if (memoItems.length > 0) {
+      setMemoItemsStorage(memoItems);
+    }
+  }, [memoItems]);
 
   function addMemoItem(formData: FormData) {
-    const newMemoItem = {
+    const newMemoItem: Memo = {
       id: memoItems.length > 0 ? memoItems[memoItems.length - 1].id + 1 : 1,
       title: String(formData.get("title")),
       description: String(formData.get("description")),
       isCompleted: false,
       date: new Date(),
     };
-    const updatedMemoItems = [...memoItems, newMemoItem];
 
+    const updatedMemoItems = [...memoItems, newMemoItem];
     setMemoItems(updatedMemoItems);
   }
 
   function toggleMemo(id: number) {
-    const updatedMemoItems = memoItems.map((memo) => {
-      if (memo.id === id) {
-        return { ...memo, isCompleted: !memo.isCompleted };
-      }
-      return memo;
-    });
+    const updatedMemoItems = memoItems.map((memo) =>
+      memo.id === id ? { ...memo, isCompleted: !memo.isCompleted } : memo
+    );
 
     setMemoItems(updatedMemoItems);
   }
 
   function deleteMemo(id: number) {
-    const updatedMemoItems = memoItems.filter((Memo) => Memo.id !== id);
-
+    const updatedMemoItems = memoItems.filter((memo) => memo.id !== id);
     setMemoItems(updatedMemoItems);
   }
 

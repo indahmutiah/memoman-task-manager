@@ -1,15 +1,22 @@
-import { useParams } from "react-router";
-
+import { useParams, useNavigate } from "react-router";
+import { getMemoByIdStorage, updateMemoByIdStorage } from "@/modules/memo";
+import { useState, useEffect } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { getMemoByIdStorage } from "@/modules/memo";
+import { Memo } from "@/types/memo";
 
 export function MemoRoute() {
   const { id } = useParams();
+  const memoId = Number(id);
+  const navigate = useNavigate();
+  const [memoItem, setMemoItem] = useState<Memo | null>(null);
 
-  if (!id) return null;
-
-  const memoItem = getMemoByIdStorage(Number(id));
+  useEffect(() => {
+    const memo = getMemoByIdStorage(memoId);
+    if (memo) {
+      setMemoItem(memo);
+    }
+  }, [memoId]);
 
   if (!memoItem) {
     return (
@@ -22,7 +29,19 @@ export function MemoRoute() {
   function handleEditMemo(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    console.log("Edit");
+    const formData = new FormData(event.currentTarget);
+    const updatedTitle = formData.get("title") as string;
+    console.log("Titel:", updatedTitle);
+    const updatedDescription = formData.get("description") as string;
+    console.log("description:", updatedDescription);
+
+    if (updatedTitle && updatedDescription) {
+      updateMemoByIdStorage(memoId, {
+        title: updatedTitle,
+        description: updatedDescription,
+      });
+      navigate("/");
+    }
   }
 
   return (

@@ -14,22 +14,22 @@ import { Trash2Icon } from "lucide-react";
 
 interface DeleteAlertProps {
   onDelete: () => void;
-  taskText: string;
+  memoText: string;
 }
 
-export function DeleteAlert({ onDelete , taskText }: DeleteAlertProps) {
+export function DeleteAlert({ onDelete, memoText }: DeleteAlertProps) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button variant="destructive">
-            <Trash2Icon size={24} />
+          <Trash2Icon size={24} />
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This Memo "{taskText}" will be permanently deleted from your Data.
+            This Memo "{memoText}" will be permanently deleted from your Data.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

@@ -5,7 +5,7 @@ import { Checkbox } from "./ui/checkbox";
 import { Badge } from "./ui/badge";
 import { DeleteAlert } from "@/components/delete-alert";
 import { Link } from "react-router";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 
 type MemoCardProps = {
   memoItem: Memo;
@@ -22,7 +22,7 @@ function truncateDescription(description: string, maxWords: number): string {
 }
 
 export function MemoCard({ memoItem, onToggle, onDelete }: MemoCardProps) {
-  const { title, isCompleted, description, date } = memoItem;
+  const { id, title, isCompleted, description, date } = memoItem;
   const truncatedDescription = truncateDescription(description, 35);
 
   return (
@@ -34,9 +34,9 @@ export function MemoCard({ memoItem, onToggle, onDelete }: MemoCardProps) {
         </div>
         <div className="inline-flex items-center gap-2">
           <Button asChild>
-            <Link to={`/memo/${memoItem.id}`}>View</Link>
+            <Link to={`/memo/${id}`}>View</Link>
           </Button>
-          <DeleteAlert onDelete={onDelete} taskText={title} />
+          <DeleteAlert onDelete={onDelete} memoText={title} />
         </div>
       </CardHeader>
       <CardContent className="px-6">

@@ -20,3 +20,20 @@ export function getMemoByIdStorage(id: number): Memo | undefined {
   const storedMemoItems = getMemoItemsStorage();
   return storedMemoItems.find((memo) => memo.id === id);
 }
+
+export function deleteMemoByIdStorage(id: number): void {
+  const storedMemoItems = getMemoItemsStorage();
+  const updatedMemoItems = storedMemoItems.filter((memo) => memo.id !== id);
+  setMemoItemsStorage(updatedMemoItems);
+}
+
+export function updateMemoByIdStorage(
+  id: number,
+  updatedMemo: Partial<Memo>
+): void {
+  const storedMemoItems = getMemoItemsStorage();
+  const updatedMemoItems = storedMemoItems.map((memo) =>
+    memo.id === id ? { ...memo, ...updatedMemo } : memo
+  );
+  setMemoItemsStorage(updatedMemoItems);
+}

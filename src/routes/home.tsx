@@ -2,17 +2,24 @@ import { useEffect, useState } from "react";
 import { MemoList } from "@/components/memo-list";
 import { Memo } from "@/types/memo";
 import { DialogAddMemo } from "@/components/dialog-add-memo";
-import { getMemoItemsStorage, setMemoItemsStorage } from "@/modules/memo";
+import {
+  getMemoItemsStorage,
+  setMemoItemsStorage,
+  deleteMemoByIdStorage,
+} from "@/modules/memo";
 
 export function HomeRoute() {
   const [memoItems, setMemoItems] = useState<Memo[]>([]);
 
   useEffect(() => {
-    if (memoItems.length > 0) {
-      setMemoItemsStorage(memoItems);
-    } else {
-      setMemoItems(getMemoItemsStorage());
+    const storedMemoItems = getMemoItemsStorage();
+    if (storedMemoItems) {
+      setMemoItems(storedMemoItems);
     }
+  }, []);
+
+  useEffect(() => {
+    setMemoItemsStorage(memoItems);
   }, [memoItems]);
 
   function addMemoItem(formData: FormData) {
@@ -37,8 +44,8 @@ export function HomeRoute() {
   }
 
   function deleteMemo(id: number) {
-    const updatedMemoItems = memoItems.filter((memo) => memo.id !== id);
-    setMemoItems(updatedMemoItems);
+    deleteMemoByIdStorage(id);
+    setMemoItems(memoItems.filter((memo) => memo.id !== id));
   }
 
   return (

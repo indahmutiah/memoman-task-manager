@@ -10,12 +10,12 @@ type MemoListProps = {
 export function MemoList({ memoItem, onToggle, onDelete }: MemoListProps) {
   return (
     <ul className="flex flex-col gap-4 p-4">
-      {memoItem.map((task) => (
+      {memoItem.map((memo) => (
         <MemoCard
-          key={task.id}
-          memoItem={task}
-          onToggle={() => onToggle(task.id)}
-          onDelete={() => onDelete(task.id)}
+          key={memo.id}
+          memoItem={memo}
+          onToggle={() => onToggle(memo.id)}
+          onDelete={() => onDelete(memo.id)}
         />
       ))}
     </ul>

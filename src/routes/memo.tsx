@@ -1,12 +1,12 @@
 import { useParams, useNavigate } from "react-router";
-import { getMemoByIdStorage, updateMemoByIdStorage } from "@/modules/memo";
 import { useState, useEffect } from "react";
+import { getMemoByIdStorage, updateMemoByIdStorage } from "@/modules/memo";
+import { Memo } from "@/types/memo";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Memo } from "@/types/memo";
 
 export function MemoRoute() {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const memoId = Number(id);
   const navigate = useNavigate();
   const [memoItem, setMemoItem] = useState<Memo | null>(null);
@@ -31,9 +31,10 @@ export function MemoRoute() {
 
     const formData = new FormData(event.currentTarget);
     const updatedTitle = formData.get("title") as string;
-    console.log("Titel:", updatedTitle);
     const updatedDescription = formData.get("description") as string;
-    console.log("description:", updatedDescription);
+
+    console.log("Updated Title:", updatedTitle);
+    console.log("Updated Description:", updatedDescription);
 
     if (updatedTitle && updatedDescription) {
       updateMemoByIdStorage(memoId, {
@@ -41,6 +42,8 @@ export function MemoRoute() {
         description: updatedDescription,
       });
       navigate("/");
+    } else {
+      alert("Title and description cannot be empty.");
     }
   }
 
@@ -49,9 +52,10 @@ export function MemoRoute() {
       <input
         type="text"
         defaultValue={memoItem.title}
+        name="title"
         className="text-2xl font-bold border p-2 rounded-md w-full"
       />
-      <Textarea defaultValue={memoItem.description} />
+      <Textarea defaultValue={memoItem.description} name="description" />
       <Button type="submit">Save Memo</Button>
     </form>
   );
